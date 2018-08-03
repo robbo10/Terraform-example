@@ -2,12 +2,17 @@ provider "aws" {
   region = "eu-west-3"
 }
 
+variable "vm_port" {
+  default = 8080
+}
+
+
 resource "aws_security_group" "allow_instance_access" {
   name = "allow_webpage_access"
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = "${var.vm_port}"
+    to_port     = "${var.vm_port}"
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
 }
